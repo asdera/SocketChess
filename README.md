@@ -1,2 +1,2 @@
 # SocketChess
-The Finest Simplest Effortless Ingenious Fastest way to play chess with your buddies online.
+The Finest Simplest Effortless Ingenious Fastest way to play Chess with your Buddies Online.
