@@ -1,0 +1,93 @@
+.dark {
+	background-color: #424242;
+}
+
+.light {
+	background-color: #fff8ba;
+}
+
+[select="selected"] {
+	background-color: #ff4040;
+}
+
+[hover="hovering"] {
+	background-color: #ffbd40;
+}
+
+[hover="unmovable"] {
+	background-color: #40c9ff;
+}
+
+.smoke {
+
+}
+
+.rose {
+	
+}
+
+.whiteP {
+	background-image: url('img/white/pawn.png');
+    
+}
+
+.whiteR {
+	background-image: url('img/white/rook.png');
+    
+}
+
+.whiteN {
+	background-image: url('img/white/knight.png');
+    
+}
+
+.whiteB {
+	background-image: url('img/white/bishop.png');
+}
+
+.whiteQ {
+	background-image: url('img/white/queen.png');
+    
+}
+
+.whiteK {
+	background-image: url('img/white/king.png');
+    
+}
+
+.blackP {
+	background-image: url('img/black/pawn.png');
+    
+}
+
+.blackR {
+	background-image: url('img/black/rook.png');
+    
+}
+
+.blackN {
+	background-image: url('img/black/knight.png');
+    
+}
+
+.blackB {
+	background-image: url('img/black/bishop.png');
+    
+}
+
+.blackQ {
+	background-image: url('img/black/queen.png');
+    
+}
+
+.blackK {
+	background-image: url('img/black/king.png'); 
+}
+
+.targP {
+	
+}
+
+.fyreP {
+	
+}
