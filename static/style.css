@@ -16,16 +16,24 @@ ul {
 	list-style: none;
 }
 
-button {
+button, input {
 	background-color: #fff8ba;
-	border: 2px solid #424242;
+	border: none;
+	color: #424242;
 	font-size: 20px;
 	font-weight: bold;
 	margin: 15px;
+	transition-duration: 0.3s;
 }
 
-th, td {
+button:hover {
+    background-color: #424242;
+    color: #fff8ba;
+}
+
+td {
     border: 1px solid black;
+    transition-duration: 0.2s;
 }
 
 table {

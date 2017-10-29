@@ -1,3 +1,25 @@
+var socks = false;
+
+$(function() {
+  query();
+});
+
+if (typeof io !== "undefined") {
+  var socket = io();
+  socks = true;
+  print("Yes Socks")
+} else {
+  print("No Socks")
+}
+if (socks) {
+  socket.on("chess move", function(str){
+    finalmove(str);
+  });
+  socket.on("chat message", function(str){
+    $("#chat > ul").append("<li>" + str + "</li>");
+  });
+}
+
 function print(a) {
   console.log(a)
 }
@@ -34,6 +56,14 @@ function tile(pos) {
   return {colour: p.slice(0, 5), piece: p.slice(5)};
 }
 
+function submitmove(str) {
+  if (socks) {
+    socket.emit("chess move", str);
+  } else {
+    finalmove(str);
+  }
+}
+
 function trymove(str, test) {
   pos = str.split("")
   pos[0] = parseInt(pos[0], 36) - 9;
@@ -53,8 +83,20 @@ function trymove(str, test) {
     if (promotion.to) {
       promotion.to = false;
       promotemove(str);
+    } else if (castle.to) {
+      if (castle.to == "whiteKingside") {
+        submitmove("e1g1")
+        submitmove("a1a1")
+        submitmove("h1f1")
+      } else if (castle.to == "whiteQueenside") {
+        submitmove("e1c1")
+        submitmove("a1a1")
+        submitmove("a1d1")
+      }
+      castle[move.turn] = false;
+      castle.to = false;
     } else {
-      finalmove(str);
+      submitmove(str)
     }
   }
 }
@@ -75,13 +117,6 @@ function finalmove(str) {
   $("#gametable .r"+pos[3]+".f"+pos[2]+" > div").attr("class", movedpiece);
   displaymove(str)
 }
-
-move = {
-  number: 1,
-  order: [],
-  turn: "white"
-}
-
 
 function displaymove(str) {
   move.order.push(str)
@@ -107,9 +142,52 @@ mouse = {
   }
 }
 
-$(function() {
+move = {
+  number: 1,
+  order: [],
+  turn: "white"
+}
+
+function chat() {
+  str = $("#chatinput").val();
+  if (socks) {
+    socket.emit("chat message", str);
+  } else {
+    $("#chat > ul").append("<li>" + str + "</li>");
+  }
+  $("#chatinput").val("");
+}
+
+function setupall() {
+  move = {
+    number: 1,
+    order: [],
+    turn: "white"
+  }
   setupboard()
+}
+
+function query() {
+  setupboard()
+  $("#restart").click(function() {
+    $("#moveorder > ul").empty();
+    $("#gametable").empty();
+    query();
+  })
+
+  $("#enter").click(function() {
+    chat();
+  })
+
+  $("#chatinput").keydown(function(event){ 
+    keyCode = (event.keyCode ? event.keyCode : event.which);   
+    if (keyCode == 13) {
+      chat();
+    }
+  });
+
   $("#gametable td").mousedown(function() {
+    mouse.submit();
     $(this).attr("select", "selected")
     finder = $(this).attr("class").split(" ")
     file = String.fromCharCode(96 + Number(finder[1].slice(-1)));
@@ -137,5 +215,4 @@ $(function() {
   }, function() {
     $(this).attr("hover", null);
   })
-});
-
+}

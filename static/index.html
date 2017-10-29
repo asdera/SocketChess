@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="title">
-		<h1>Chess!</h1>
+		<h1>Socket Chess!</h1>
 		<p>Free Unblocked Online Chess</p>
 	</div>
 	<div id="game">
@@ -33,14 +33,16 @@
 		</div>
 		<div id="moveorder" class="ultblock">
 			<ul></ul>
-			<button>Restart</button>
+			<button id="restart">Restart</button>
+			<button id="flip">Flip Board</button>
 		</div>
 		<div id="chat" class="ultblock">
 			<ul></ul>
-			<button>Enter</button>
+			<input id="chatinput" placeholder="Say Hello!"><button id="enter">Enter</button>
 		</div>
 		
 	</div>
+	<script src="/socket.io/socket.io.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="main.js"></script>
 	<script src="rules.js"></script>

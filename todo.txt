@@ -1,0 +1,16 @@
+TODO?
+
+- Promotion
+- Castling/En Passant
+- Chat
+- Reset Board
+- Flip Board
+- Undos
+
+and then we're pretty gucci
+
+MORE?
+
+- Check/Mate/Pin checker
+- Matchmaking
+- Build a chess bot
