@@ -1,13 +1,27 @@
 .dark {
+	/*background-color: #423b00;*/
 	background-color: #424242;
 }
 
 .light {
+	/*background-color: #ffe500;*/
 	background-color: #fff8ba;
 }
 
+.lightgold {
+	background-color: #ffe500;
+}
+
+.darkgold {
+	background-color: #423b00;
+}
+
 [select="selected"] {
-	background-color: #ff4040;
+	background-color: #ffffff
+}
+
+[select="selected"] {
+	background-color: #40c9ff;
 }
 
 [hover="hovering"] {
@@ -15,7 +29,7 @@
 }
 
 [hover="unmovable"] {
-	background-color: #40c9ff;
+	background-color: #ff4040;
 }
 
 .smoke {

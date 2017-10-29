@@ -1,8 +1,39 @@
-var socks = false;
-
 $(function() {
   query();
+  $("#flip").click(function() {
+    $("#gametable, #gametable tr").reverseChildren();
+  });
+  $("#enter").click(function() {
+    chat();
+  });
+  $("#chatinput").keydown(function(event){ 
+    keyCode = (event.keyCode ? event.keyCode : event.which);   
+    if (keyCode == 13) {
+      chat();
+    }
+  });
+  $("#restart").click(function() {
+    $("#moveorder > ul, #gametable").empty();
+    query();
+  });
+  $("#promotetable td").mousedown(function() {
+    piece = $(this).children("div").attr("class");
+    if (socks) {
+      socket.emit("switch promotion", piece);
+    } else {
+      switchpromote(piece);
+    }
+  });
 });
+
+$.fn.reverseChildren = function() {
+  return this.each(function(){
+    var $this = $(this);
+    $this.children().each(function(){ $this.prepend(this) });
+  });
+};
+
+var socks = false;
 
 if (typeof io !== "undefined") {
   var socket = io();
@@ -11,11 +42,18 @@ if (typeof io !== "undefined") {
 } else {
   print("No Socks")
 }
+
 if (socks) {
-  socket.on("chess move", function(str){
+  socket.on("chess move", function(str) {
     finalmove(str);
   });
-  socket.on("chat message", function(str){
+  socket.on("chess promotion", function(str) {
+    promotemove(str);
+  });
+  socket.on("switch promotion", function(str) {
+    switchpromote(str);
+  });
+  socket.on("chat message", function(str) {
     $("#chat > ul").append("<li>" + str + "</li>");
   });
 }
@@ -56,6 +94,12 @@ function tile(pos) {
   return {colour: p.slice(0, 5), piece: p.slice(5)};
 }
 
+function switchpromote(str) {
+  promotion.piece[str.slice(0, 5)] = str.slice(5);
+  $("#promotetable td.P" + str.slice(0, 5)).attr("select", null);
+  $("#promotetable div." + str.slice(0)).parent("td").attr("select", "selected");
+}
+
 function submitmove(str) {
   if (socks) {
     socket.emit("chess move", str);
@@ -81,9 +125,14 @@ function trymove(str, test) {
   }
   if (movable(pos, movedpiece.slice(0, 5), movedpiece.slice(5))) {
     if (promotion.to) {
+      if (socks) {
+        socket.emit("chess promotion", str);
+      } else {
+        promotemove(str);
+      }
       promotion.to = false;
-      promotemove(str);
-    } else if (castle.to) {
+    }
+    if (castle.to) {
       if (castle.to == "whiteKingside") {
         submitmove("e1g1")
         submitmove("a1a1")
@@ -102,7 +151,13 @@ function trymove(str, test) {
 }
 
 function promotemove(str) {
-  print("promoting")
+  pos = str.split("")
+  pos[0] = parseInt(pos[0], 36) - 9;
+  pos[1] = Number(pos[1]);
+  pos[2] = parseInt(pos[2], 36) - 9;
+  pos[3] = Number(pos[3])
+  movedpiece = $("#gametable .r"+pos[1]+".f"+pos[0]+" > div").attr("class");
+  $("#gametable .r"+pos[1]+".f"+pos[0]+" > div").attr("class", movedpiece.slice(0, 5) + promotion.piece[move.turn]);
 }
 
 function finalmove(str) {
@@ -138,7 +193,7 @@ mouse = {
     }
     this.pos1 = null,
     this.pos2 = null
-    $("td").attr("hover", null).attr("select", null);
+    $("#gametable td").attr("hover", null).attr("select", null);
   }
 }
 
@@ -168,24 +223,7 @@ function setupall() {
 }
 
 function query() {
-  setupboard()
-  $("#restart").click(function() {
-    $("#moveorder > ul").empty();
-    $("#gametable").empty();
-    query();
-  })
-
-  $("#enter").click(function() {
-    chat();
-  })
-
-  $("#chatinput").keydown(function(event){ 
-    keyCode = (event.keyCode ? event.keyCode : event.which);   
-    if (keyCode == 13) {
-      chat();
-    }
-  });
-
+  setupall();
   $("#gametable td").mousedown(function() {
     mouse.submit();
     $(this).attr("select", "selected")
@@ -193,15 +231,13 @@ function query() {
     file = String.fromCharCode(96 + Number(finder[1].slice(-1)));
     rank = finder[0].slice(-1);
     mouse.pos1 = file + rank;
-  })
-  $("#gametable td").mouseup(function() {
+  }).mouseup(function() {
     finder = $(this).attr("class").split(" ")
     file = String.fromCharCode(96 + Number(finder[1].slice(-1)));
     rank = finder[0].slice(-1)
     mouse.pos2 = file + rank;
     mouse.submit();
-  })
-  $("#gametable td").hover(function() {
+  }).hover(function() {
     if (mouse.pos1) {
       finder = $(this).attr("class").split(" ")
       file = String.fromCharCode(96 + Number(finder[1].slice(-1)));
@@ -214,5 +250,5 @@ function query() {
     }
   }, function() {
     $(this).attr("hover", null);
-  })
+  });
 }

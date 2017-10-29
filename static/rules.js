@@ -187,5 +187,6 @@ castle = {
 
 promotion = {
 	rules: ["R", "N", "B", "Q"],
+	piece: {white: "Q", black: "Q"},
 	to: false
 }

@@ -7,10 +7,15 @@ const port = process.env.PORT || 3000;
 app.use(express.static(__dirname + "/static"));
 
 function onConnection(socket){
-  console.log("a user connected");
+  console.log("User connected");
   socket.on("chess move", function(str) {
-  	console.log("A CHESS MOVE!")
     io.emit("chess move", str);
+  });
+  socket.on("chess promotion", function(str) {
+    io.emit("chess promotion", str);
+  });
+  socket.on("switch promotion", function(str) {
+    io.emit("switch promotion", str);
   });
   socket.on("chat message", function(str) {
     io.emit("chat message", str);
