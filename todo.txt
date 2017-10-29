@@ -1,5 +1,6 @@
 TODO?
 
+- Auto Restart for Everyone
 - Promotion
 - Castling/En Passant
 - Chat
