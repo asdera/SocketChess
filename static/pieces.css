@@ -28,59 +28,70 @@
 
 .whiteP {
 	background-image: url("img/white/pawn.png");
+	background-image: url("img/white/pawn.png");
 }
 
 .whiteR {
+	background-image: url("img/white/rook.png");
 	background-image: url("img/white/rook.png");
     
 }
 
 .whiteN {
 	background-image: url("img/white/knight.png");
+	/*background-image: url("img/white/knight.png");*/
     
 }
 
 .whiteB {
 	background-image: url("img/white/bishop.png");
+	/*background-image: url("img/white/bishop.png");*/
 }
 
 .whiteQ {
 	background-image: url("img/white/queen.png");
+	/*background-image: url("img/white/queen.png");*/
     
 }
 
 .whiteK {
 	background-image: url("img/white/king.png");
+	/*background-image: url("img/white/king.png");*/
     
 }
 
 .blackP {
-	background-image: url("img/black/pawn.png");
+	background-image: url("https://ibin.co/3fTvIbvIwMF2.png");
+	/*background-image: url("img/black/pawn.png");*/
     
 }
 
 .blackR {
-	background-image: url("img/black/rook.png");
+	background-image: url("https://ibin.co/3fTvuhXZocdZ.png");
+	/*background-image: url("img/black/rook.png");*/
     
 }
 
 .blackN {
-	background-image: url("img/black/knight.png");
+	background-image: url("https://ibin.co/3fTv6Qyp9Vnh.png");
+	/*background-image: url("img/black/knight.png");*/
     
 }
 
 .blackB {
-	background-image: url("https://ibin.co/3fTJMfja9pBx.png");
+	background-image: url("https://ibin.co/3fTJMfja9pBx.png")
 	/*background-image: url("img/black/bishop.png");*/
 }
 
 .blackQ {
-	background-image: url("img/black/queen.png");
+	background-image: url("https://ibin.co/3fTvUmrmjM4a.png");
+	/*background-image: url("img/black/queen.png");*/
     
 }
 
 .blackK {
-	background-image: url("img/black/king.png"); 
+	background-image: url("https://ibin.co/3fTuo0t1K7ul.png");
+	/*background-image: url("img/black/king.png");*/
 }
 
 .targP {
