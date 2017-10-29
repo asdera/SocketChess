@@ -27,35 +27,35 @@
 }
 
 .whiteP {
-	background-image: url("img/white/pawn.png");
-	background-image: url("img/white/pawn.png");
+	background-image: url("https://ibin.co/3fU2Stfl1xre.png");
+	/*background-image: url("img/white/pawn.png");*/
 }
 
 .whiteR {
-	background-image: url("img/white/rook.png");
-	background-image: url("img/white/rook.png");
+	background-image: url("https://ibin.co/3fU2q083Og9j.png");
+	/*background-image: url("img/white/rook.png");*/
     
 }
 
 .whiteN {
-	background-image: url("img/white/knight.png");
+	background-image: url("https://ibin.co/3fTzyf3fiqZN.png");
 	/*background-image: url("img/white/knight.png");*/
     
 }
 
 .whiteB {
-	background-image: url("img/white/bishop.png");
+	background-image: url("https://ibin.co/3fTxbbfPMok3.png");
 	/*background-image: url("img/white/bishop.png");*/
 }
 
 .whiteQ {
-	background-image: url("img/white/queen.png");
+	background-image: url("https://ibin.co/3fU2hG7OvzsJ.png");
 	/*background-image: url("img/white/queen.png");*/
     
 }
 
 .whiteK {
-	background-image: url("img/white/king.png");
+	background-image: url("https://ibin.co/3fTznjXr90Nt.png");
 	/*background-image: url("img/white/king.png");*/
     
 }
